@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "tool_version": "2026.11.12-rc2",
+  "adapter": "software_simulation_only",
+  "evidence_scope": "This replay is not host observation or real hardware acceptance.",
+  "project_id": "desk-box-pro-v21",
+  "device_id": "virtual-desk-box",
+  "boot_id": "boot-offline-1",
+  "current_boot_started_at": null,
+  "retired_boot_ids": [],
+  "now": 6,
+  "device_online": false,
+  "lifecycle_definitions": {
+    "submitted": "A valid device request entered the simulated host boundary.",
+    "accepted": "The simulated host accepted the existing request; this fact survives restart.",
+    "completed": "The simulated host produced a result; it may not have reached the device.",
+    "delivered": "The simulated device received the exact completed result under the current boot.",
+    "applied": "The simulated device acknowledged applying that exact result; later rejection does not erase it."
+  },
+  "requests": [
+    {
+      "request_id": "req-extend-offline-1",
+      "capability": "windows_projection",
+      "revision": 3,
+      "submitted": true,
+      "accepted": true,
+      "completed": true,
+      "delivered": false,
+      "applied": false,
+      "submitted_hash": "75a2242ad7487868ad483893e5275b8b4ceb13b5d0351f3dbe3a8625f2adbce6",
+      "result_hash": "2f45e72bf1188a77f1e0ac517c854f0702706f69e73f2614d8a45e350024fbc3",
+      "expires_at": 10,
+      "last_accepted_time": 3,
+      "delivered_boot_id": null,
+      "restart_history": [],
+      "status": "completed_delivery_unknown",
+      "rejections": [
+        {
+          "event_id": "evt-extend-deliver-1",
+          "reason": "device_offline_delivery_unknown"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "event_id": "evt-extend-submit-1",
+      "request_id": "req-extend-offline-1",
+      "kind": "device.task.submit",
+      "revision": 1,
+      "outcome": "accepted",
+      "reason": "submitted"
+    },
+    {
+      "event_id": "evt-extend-accepted-1",
+      "request_id": "req-extend-offline-1",
+      "kind": "host.task.accepted",
+      "revision": 2,
+      "outcome": "accepted",
+      "reason": "task_accepted"
+    },
+    {
+      "event_id": "evt-extend-completed-1",
+      "request_id": "req-extend-offline-1",
+      "kind": "host.task.completed",
+      "revision": 3,
+      "outcome": "accepted",
+      "reason": "task_completed"
+    },
+    {
+      "event_id": "evt-extend-deliver-1",
+      "request_id": "req-extend-offline-1",
+      "kind": "host.result.deliver",
+      "revision": 4,
+      "outcome": "rejected",
+      "reason": "device_offline_delivery_unknown"
+    }
+  ],
+  "summary": {
+    "input_messages": 4,
+    "accepted": 3,
+    "duplicates_ignored": 0,
+    "rejected": 1,
+    "applied_requests": 0,
+    "real_hardware_messages_sent": 0,
+    "network_calls": 0
+  },
+  "source": {
+    "name": "events-offline.json",
+    "sha256": "ae608c809fe38ef547adcddbc2acfe8ea0fc63af29c5123f8b2735d3a51c99c9"
+  }
+}

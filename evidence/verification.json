@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "observed_at": "2026-11-16T02:47:16.847536+00:00",
+  "browser": "Chromium via Playwright",
+  "url_scheme": "file",
+  "browser_offline": true,
+  "scope": "Local host observation only; not Windows or real hardware acceptance.",
+  "checks": [
+    {
+      "name": "offline_file_load",
+      "passed": true,
+      "details": "file:///workspace/desk-box-prototype/index.html"
+    },
+    {
+      "name": "fifteen_positions_rendered",
+      "passed": true,
+      "details": "15"
+    },
+    {
+      "name": "five_middle_defaults",
+      "passed": true,
+      "details": [
+        "中",
+        "中",
+        "中",
+        "中",
+        "中"
+      ]
+    },
+    {
+      "name": "switch_1_up",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_1_mid",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_1_down",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_2_up",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_2_mid",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_2_down",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_3_up",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_3_mid",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_3_down",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_4_up",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_4_mid",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_4_down",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_5_up",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_5_mid",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "switch_5_down",
+      "passed": true,
+      "details": "switch-position active"
+    },
+    {
+      "name": "shutdown_disables_other_switches",
+      "passed": true,
+      "details": "1号开关在盒子关闭后禁用"
+    },
+    {
+      "name": "shutdown_allows_power_restore",
+      "passed": true,
+      "details": "5号中位仍可点击"
+    },
+    {
+      "name": "power_restored",
+      "passed": true,
+      "details": "盒子开机"
+    },
+    {
+      "name": "success_applied_updates_audio",
+      "passed": true,
+      "details": "静音"
+    },
+    {
+      "name": "success_lifecycle",
+      "passed": true,
+      "details": "5"
+    },
+    {
+      "name": "success_applied_count",
+      "passed": true,
+      "details": "1"
+    },
+    {
+      "name": "offline_does_not_apply_audio",
+      "passed": true,
+      "details": "正常音量"
+    },
+    {
+      "name": "offline_delivery_unknown",
+      "passed": true,
+      "details": "completed_delivery_unknown"
+    },
+    {
+      "name": "offline_no_applied",
+      "passed": true,
+      "details": "0"
+    },
+    {
+      "name": "timeout_result_unknown",
+      "passed": true,
+      "details": "timeout_result_unknown"
+    },
+    {
+      "name": "timeout_does_not_apply_restart",
+      "passed": true,
+      "details": "正常"
+    },
+    {
+      "name": "timeout_late_completion_rejected",
+      "passed": true,
+      "details": "迟到完成事件已拒绝"
+    },
+    {
+      "name": "duplicate_ignored_once",
+      "passed": true,
+      "details": "{'duplicates': 1, 'sameIdentity': True, 'projection': '扩展屏幕'}"
+    },
+    {
+      "name": "duplicate_preserves_event_identity",
+      "passed": true,
+      "details": "{'duplicates': 1, 'sameIdentity': True, 'projection': '扩展屏幕'}"
+    },
+    {
+      "name": "duplicate_still_single_applied",
+      "passed": true,
+      "details": "{'duplicates': 1, 'sameIdentity': True, 'projection': '扩展屏幕'}"
+    },
+    {
+      "name": "mic_alert_red_flash",
+      "passed": true,
+      "details": "red-fast"
+    },
+    {
+      "name": "mic_alert_returns_white",
+      "passed": true,
+      "details": "white"
+    },
+    {
+      "name": "mic_remains_disabled",
+      "passed": true,
+      "details": "禁用（仅模拟）"
+    },
+    {
+      "name": "standby_blue_breath",
+      "passed": true,
+      "details": "blue"
+    },
+    {
+      "name": "working_purple_double",
+      "passed": true,
+      "details": "purple"
+    },
+    {
+      "name": "error_red_breath",
+      "passed": true,
+      "details": "red-breath"
+    },
+    {
+      "name": "text_payload_not_executed",
+      "passed": true,
+      "details": "undefined"
+    },
+    {
+      "name": "text_payload_not_rendered_as_html",
+      "passed": true,
+      "details": "输入仅作为文本显示"
+    },
+    {
+      "name": "log_download",
+      "passed": true,
+      "details": "6 events"
+    },
+    {
+      "name": "hardware_tab",
+      "passed": true,
+      "details": "硬件缺口和成本复核可见"
+    },
+    {
+      "name": "evidence_tab",
+      "passed": true,
+      "details": "回放证据可见"
+    },
+    {
+      "name": "no_network_requests",
+      "passed": true,
+      "details": "[]"
+    },
+    {
+      "name": "no_javascript_errors",
+      "passed": true,
+      "details": "[]"
+    },
+    {
+      "name": "no_console_errors",
+      "passed": true,
+      "details": "[]"
+    }
+  ],
+  "network_requests": [],
+  "page_errors": [],
+  "console_errors": [],
+  "real_hardware_tested": false,
+  "windows_tested": false
+}

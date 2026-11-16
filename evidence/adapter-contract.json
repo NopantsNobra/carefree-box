@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "adapter": "software_simulation_only",
+  "required_fields": [
+    "boot_id",
+    "capability",
+    "device_id",
+    "event_id",
+    "kind",
+    "payload",
+    "project_id",
+    "request_id",
+    "result_source",
+    "revision",
+    "sent_at"
+  ],
+  "optional_fields": [
+    "expires_at"
+  ],
+  "message_kinds": [
+    "device.boot",
+    "device.result.applied",
+    "device.task.submit",
+    "host.result.deliver",
+    "host.task.accepted",
+    "host.task.completed"
+  ],
+  "result_sources": [
+    "documentation_claim",
+    "hardware_verified",
+    "host_observed",
+    "maintainer_history",
+    "software_simulation",
+    "unknown"
+  ],
+  "directions": {
+    "device.task.submit": "device_to_host_command",
+    "host.task.accepted": "host_receipt",
+    "host.task.completed": "host_event",
+    "host.result.deliver": "host_to_device_command",
+    "device.result.applied": "device_receipt",
+    "device.boot": "device_lifecycle_event"
+  },
+  "lifecycle": [
+    "submitted",
+    "completed",
+    "delivered",
+    "applied"
+  ],
+  "queued_equals_applied": false,
+  "real_transport_implemented": false,
+  "source": {
+    "name": "events-online.json",
+    "sha256": "2bb1b388e04c0e6e5842a4efda3e4246331bb894cadab527c8be0711baae1013"
+  }
+}

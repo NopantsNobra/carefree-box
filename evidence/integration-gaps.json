@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "tool_version": "2026.11.12-rc2",
+  "project_id": "desk-box-pro-v21",
+  "device_id": "virtual-desk-box",
+  "selection_policy": {
+    "hardware_neutral": true,
+    "brand_preference": false,
+    "brand_ranking": "not_performed",
+    "purchase_required": false,
+    "existing_equipment_and_software_routes_allowed": true,
+    "comparison_basis": [
+      "user_goal",
+      "interfaces",
+      "evidence",
+      "cost",
+      "deployment",
+      "maintenance"
+    ],
+    "brand_or_model_does_not_upgrade_evidence": true
+  },
+  "fact_isolation": {
+    "sample_structure_only": true,
+    "sample_facts_must_not_be_inherited": true,
+    "required_capability_is_not_device_claim": true,
+    "non_unknown_facts_require_current_case_evidence": true
+  },
+  "inputs": {
+    "project": {
+      "name": "project.json",
+      "sha256": "53e6f0531cdad6fcf63fc6cae1c971842c3de7c2891b58da8751f28c587b05b1"
+    },
+    "device": {
+      "name": "device.json",
+      "sha256": "99967349694a3bfc71e339ee0bd4744208bbb79f1e4d07679d0c1b0092c612e6"
+    }
+  },
+  "board_review": {
+    "board_identity": "unknown",
+    "pinout": "unknown",
+    "rule": "Obtain exact board and firmware documentation before assigning pins.",
+    "required_facts": [
+      "exact board revision",
+      "firmware version",
+      "official pin/interface map",
+      "existing transport and result callback"
+    ],
+    "hardware_tested_by_this_tool": false
+  },
+  "matches": [
+    {
+      "capability": "switch_input",
+      "software_baseline": {
+        "status": "unknown",
+        "note": "No built-in software baseline is asserted for this custom capability."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线 HTML 虚拟开关适配器",
+        "details": "仅点击页面中的五个三位开关，不代表真实触点或 GPIO 已验证。",
+        "interfaces": [
+          "offline HTML three-state controls"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    },
+    {
+      "capability": "led_output",
+      "software_baseline": {
+        "status": "unknown",
+        "note": "No built-in software baseline is asserted for this custom capability."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线 HTML 光效适配器",
+        "details": "仅 CSS 光效，不代表 WS2812B、电源或导光结构已验证。",
+        "interfaces": [
+          "offline HTML LED panel"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    },
+    {
+      "capability": "voice_control",
+      "software_baseline": {
+        "status": "unknown",
+        "note": "No built-in software baseline is asserted for this custom capability."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线状态机",
+        "details": "只改变虚拟语音助手状态，不连接小爱同学。",
+        "interfaces": [
+          "offline HTML voice state"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    },
+    {
+      "capability": "microphone_mute",
+      "software_baseline": {
+        "status": "unknown",
+        "note": "No built-in software baseline is asserted for this custom capability."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线状态机",
+        "details": "只显示虚拟麦克风禁用状态，不打开麦克风，也不构成物理隐私隔离。",
+        "interfaces": [
+          "offline HTML microphone state"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    },
+    {
+      "capability": "windows_audio",
+      "software_baseline": {
+        "status": "unknown",
+        "note": "No built-in software baseline is asserted for this custom capability."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线状态机",
+        "details": "只改变页面中的静音状态，不控制真实 Windows 音量。",
+        "interfaces": [
+          "offline HTML audio state"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    },
+    {
+      "capability": "windows_display",
+      "software_baseline": {
+        "status": "unknown",
+        "note": "No built-in software baseline is asserted for this custom capability."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线状态机",
+        "details": "只改变页面中的显示器状态，不控制真实 Windows 屏幕。",
+        "interfaces": [
+          "offline HTML display state"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    },
+    {
+      "capability": "windows_projection",
+      "software_baseline": {
+        "status": "unknown",
+        "note": "No built-in software baseline is asserted for this custom capability."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线状态机",
+        "details": "只改变页面中的投影模式，不控制真实 Windows 投影。",
+        "interfaces": [
+          "offline HTML projection state"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    },
+    {
+      "capability": "windows_restart",
+      "software_baseline": {
+        "status": "unknown",
+        "note": "No built-in software baseline is asserted for this custom capability."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线状态机",
+        "details": "只显示模拟重启流程，不重启电脑。",
+        "interfaces": [
+          "offline HTML restart state"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    },
+    {
+      "capability": "device_power",
+      "software_baseline": {
+        "status": "unknown",
+        "note": "No built-in software baseline is asserted for this custom capability."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线状态机",
+        "details": "只切换页面可用状态，不切断真实电源。",
+        "interfaces": [
+          "offline HTML power state"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    },
+    {
+      "capability": "task_display",
+      "software_baseline": {
+        "status": "available",
+        "note": "Offline HTML can display synthetic tasks."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线 HTML 事件面板",
+        "details": "显示模拟任务和生命周期，不是真实设备屏幕。",
+        "interfaces": [
+          "offline HTML event list"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    },
+    {
+      "capability": "result_display",
+      "software_baseline": {
+        "status": "available",
+        "note": "Offline HTML can display simulated results."
+      },
+      "device": {
+        "status": "software_simulation",
+        "source": "本轮离线 HTML 结果面板",
+        "details": "显示模拟结果，不是真实硬件回执。",
+        "interfaces": [
+          "offline HTML result region"
+        ]
+      },
+      "evidence_level": "software_simulation",
+      "fit": "adaptation_and_hardware_verification_required",
+      "gap": "The evidence does not establish real hardware compatibility for this project.",
+      "alternative": "Use the software simulation while the interface remains unverified."
+    }
+  ],
+  "summary": {
+    "required": 11,
+    "hardware_verified": 0,
+    "unverified_or_simulated": 11,
+    "simulation_upgrades_device_evidence": false
+  },
+  "next_verification": [
+    "Review official board and firmware documentation for every claimed interface.",
+    "Run the neutral protocol replay before connecting a real adapter.",
+    "Accept each real device capability separately and retain its test record."
+  ]
+}

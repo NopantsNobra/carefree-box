@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "tool_version": "2026.11.12-rc2",
+  "adapter": "software_simulation_only",
+  "evidence_scope": "This replay is not host observation or real hardware acceptance.",
+  "project_id": "desk-box-pro-v21",
+  "device_id": "virtual-desk-box",
+  "boot_id": "boot-online-1",
+  "current_boot_started_at": null,
+  "retired_boot_ids": [],
+  "now": 20,
+  "device_online": true,
+  "lifecycle_definitions": {
+    "submitted": "A valid device request entered the simulated host boundary.",
+    "accepted": "The simulated host accepted the existing request; this fact survives restart.",
+    "completed": "The simulated host produced a result; it may not have reached the device.",
+    "delivered": "The simulated device received the exact completed result under the current boot.",
+    "applied": "The simulated device acknowledged applying that exact result; later rejection does not erase it."
+  },
+  "requests": [
+    {
+      "request_id": "req-mute-1",
+      "capability": "windows_audio",
+      "revision": 5,
+      "submitted": true,
+      "accepted": true,
+      "completed": true,
+      "delivered": true,
+      "applied": true,
+      "submitted_hash": "b218cdf95349208684a18f2d552e264955d51a6c030283b96b1fd9a9d146014c",
+      "result_hash": "0dd8c141b8df5cb792b3e28c271ce9603e05982e0a742eeb875fa161ad16b127",
+      "expires_at": 30,
+      "last_accepted_time": 5,
+      "delivered_boot_id": "boot-online-1",
+      "restart_history": [],
+      "status": "applied",
+      "rejections": []
+    },
+    {
+      "request_id": "req-restart-timeout-1",
+      "capability": "windows_restart",
+      "revision": 2,
+      "submitted": true,
+      "accepted": true,
+      "completed": false,
+      "delivered": false,
+      "applied": false,
+      "submitted_hash": "bbb20a5a5387ceda82d10a2568c7584e33b17bb0667d5aa91d4d1a3397510bb7",
+      "result_hash": null,
+      "expires_at": 12,
+      "last_accepted_time": 11,
+      "delivered_boot_id": null,
+      "restart_history": [],
+      "status": "timeout_result_unknown",
+      "rejections": [
+        {
+          "event_id": "evt-restart-completed-late-1",
+          "reason": "expired"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "event_id": "evt-mute-submit-1",
+      "request_id": "req-mute-1",
+      "kind": "device.task.submit",
+      "revision": 1,
+      "outcome": "accepted",
+      "reason": "submitted"
+    },
+    {
+      "event_id": "evt-mute-accepted-1",
+      "request_id": "req-mute-1",
+      "kind": "host.task.accepted",
+      "revision": 2,
+      "outcome": "accepted",
+      "reason": "task_accepted"
+    },
+    {
+      "event_id": "evt-mute-completed-1",
+      "request_id": "req-mute-1",
+      "kind": "host.task.completed",
+      "revision": 3,
+      "outcome": "accepted",
+      "reason": "task_completed"
+    },
+    {
+      "event_id": "evt-mute-delivered-1",
+      "request_id": "req-mute-1",
+      "kind": "host.result.deliver",
+      "revision": 4,
+      "outcome": "accepted",
+      "reason": "result_delivered"
+    },
+    {
+      "event_id": "evt-mute-applied-1",
+      "request_id": "req-mute-1",
+      "kind": "device.result.applied",
+      "revision": 5,
+      "outcome": "accepted",
+      "reason": "result_applied"
+    },
+    {
+      "event_id": "evt-restart-submit-1",
+      "request_id": "req-restart-timeout-1",
+      "kind": "device.task.submit",
+      "revision": 1,
+      "outcome": "accepted",
+      "reason": "submitted"
+    },
+    {
+      "event_id": "evt-restart-accepted-1",
+      "request_id": "req-restart-timeout-1",
+      "kind": "host.task.accepted",
+      "revision": 2,
+      "outcome": "accepted",
+      "reason": "task_accepted"
+    },
+    {
+      "event_id": "evt-restart-completed-late-1",
+      "request_id": "req-restart-timeout-1",
+      "kind": "host.task.completed",
+      "revision": 3,
+      "outcome": "rejected",
+      "reason": "expired"
+    },
+    {
+      "event_id": "evt-mute-submit-1",
+      "request_id": "req-mute-1",
+      "kind": "device.task.submit",
+      "revision": 1,
+      "outcome": "duplicate_ignored",
+      "reason": "same_event_id_and_payload"
+    }
+  ],
+  "summary": {
+    "input_messages": 9,
+    "accepted": 7,
+    "duplicates_ignored": 1,
+    "rejected": 1,
+    "applied_requests": 1,
+    "real_hardware_messages_sent": 0,
+    "network_calls": 0
+  },
+  "source": {
+    "name": "events-online.json",
+    "sha256": "2bb1b388e04c0e6e5842a4efda3e4246331bb894cadab527c8be0711baae1013"
+  }
+}
