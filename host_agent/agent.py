@@ -31,10 +31,15 @@ class HostReceiver:
         self.framer = LineFramer()
         self.inbound: list[InboundRecord] = []
         self._on_accept: list[Callable[[dict[str, Any], LifecycleDecision], None]] = []
+        self._on_record: list[Callable[[InboundRecord], None]] = []
 
     def on_accept(self, callback: Callable[[dict[str, Any], LifecycleDecision], None]) -> None:
         """注册已接收消息的处理器（能力层后续接入点）。"""
         self._on_accept.append(callback)
+
+    def on_record(self, callback: Callable[[InboundRecord], None]) -> None:
+        """注册全部入站记录的观察者（含拒绝/重复/冲突），供编排器记录事件序列。"""
+        self._on_record.append(callback)
 
     def reset_framer(self) -> None:
         """重连后调用：丢弃残帧，防止跨会话粘连。"""
@@ -48,29 +53,40 @@ class HostReceiver:
         frame_events = self.framer.feed(chunk)
         new: list[InboundRecord] = []
         for ev in frame_events:
-            rec = self._handle_frame(ev)
+            rec, deferred_accept = self._handle_frame(ev)
             if rec is not None:
                 self.inbound.append(rec)
                 new.append(rec)
+                # 先记录入站事件（保证 submit 在 host 事件之前），再触发编排
+                for cb in self._on_record:
+                    cb(rec)
+                if deferred_accept is not None:
+                    msg, decision = deferred_accept
+                    for cb in self._on_accept:
+                        cb(msg, decision)
         return new
 
-    def _handle_frame(self, ev: FrameEvent) -> InboundRecord | None:
+    def _handle_frame(self, ev: FrameEvent) -> tuple[InboundRecord | None, tuple | None]:
+        """返回 (入站记录, 延迟触发的 accept 回调参数)。
+
+        延迟 accept 回调是为了让编排器产生的 host 事件排在该入站记录之后。
+        """
         if ev.kind == "line":
             result = envelope.decode_line(ev.data)
             if not result.ok:
                 return InboundRecord(ev.data, "reject", result.reason or "invalid",
-                                     bad_fields=result.bad_fields)
+                                     bad_fields=result.bad_fields), None
             msg = result.message
             assert msg is not None
             decision = self.lifecycle.process(msg)
-            if decision.action == "accept":
-                for cb in self._on_accept:
-                    cb(msg, decision)
-            return InboundRecord(ev.data, decision.action, decision.reason, msg)
+            deferred = (msg, decision) if decision.action == "accept" else None
+            return InboundRecord(ev.data, decision.action, decision.reason, msg), deferred
         if ev.kind == "error":
-            return InboundRecord(ev.data, "reject", ev.reason)
-        # dropped：超长帧已完成恢复，仅记事件，不产生消息记录
-        return None
+            return InboundRecord(ev.data, "reject", ev.reason), None
+        if ev.kind == "dropped":
+            # 超长帧被丢弃：记录为拒绝事件，连接保持可恢复（COM-06）
+            return InboundRecord(ev.data, "reject", spec.REASON_TOO_LARGE), None
+        return None, None
 
     def rejected_reasons(self) -> list[str]:
         return [r.reason for r in self.inbound if r.outcome == "reject"]

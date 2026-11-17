@@ -39,15 +39,18 @@
 - **交付**：`host_agent/`（对应开发手册 7.1 的 `host-agent/`，Python 包名不可含连字符）。31 项单元测试覆盖信封负向用例、分帧恢复、COM-06 端到端、幂等/修订/终态、重连快照同步；运行 `python -m unittest host_agent.tests.test_wp_a1 -v`。
 - **未完成**：真实串口驱动（当前仅内存虚拟传输）、Windows 能力调用与 UI（属 WP-A3～A7）。本包只验证协议与传输行为，**不是实机验收**。
 
-### WP-A2 虚拟设备模拟器 ⏱2–3人日
+### WP-A2 虚拟设备模拟器 ⏱2–3人日 — 2026-11-17 已实现
 - **内容**：脚本化虚拟设备，可回放成功/离线/超时/重复/非法帧五类剧本。
 - **验收**：M1 清单第 1 项；剧本可直接用于回归。
 - **依赖**：WP-A1。**需求映射**：COM-01～COM-08。
+- **交付**：`host_agent/simulator/`（scripts.py 五剧本 + executor.py 剧本执行器）。剧本事件序列与 `evidence/replay-online.json`、`replay-offline.json` 逐项交叉验证。执行器强制标注 `software_simulation`，不得冒充 `host_observed`。
 
-### WP-A3 请求生命周期与幂等 ⏱3–4人日
+### WP-A3 请求生命周期与幂等 ⏱3–4人日 — 2026-11-17 已实现（编排层）
 - **内容**：五阶段状态机、request_id/revision 管理、去重键、迟到结果处理、`completed_delivery_unknown` 等异常终态。
 - **验收**：COM-02/03/04/05 通过；宿主事实持久化（重启配套程序不丢失）。
 - **依赖**：WP-A1。**需求映射**：COM-001、BOOT-004。
+- **交付**：`host_agent/orchestrator.py`（HostOrchestrator）+ `capabilities/base.py`（能力接口与安全默认）。驱动五阶段、busy 单任务锁、超时/离线不确定终态、迟到结果拒绝、状态持久化。默认执行器返回 `unsupported_capability`，不执行任何 Windows API；真实能力层仍属 A4～A6。
+- **验证**：11 项测试覆盖 busy 不排队、白名单拦截、不确定终态不改写、宿主事实跨重启存活；与 WP-A1/WP-A2 合计 54 项测试全通过。
 
 ### WP-A4 音频能力 ⏱3–4人日
 - **内容**：静音/恢复、原状态保存/回滚、设备拔出处理、真实状态回读。
