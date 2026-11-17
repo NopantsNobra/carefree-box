@@ -11,18 +11,25 @@
 @media(max-width:1100px){.experience-grid{grid-template-columns:1fr}.side-stack{display:grid;grid-template-columns:1fr 1fr}.route-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.shell{padding:0 15px 35px}.topbar{align-items:flex-start;padding-top:18px}.sim-badge{font-size:10px;padding:6px 9px}.brand h1{font-size:15px}.tabs{overflow:auto}.tab-button{white-space:nowrap}.stage-scene{padding:18px 8px;overflow:auto}.light-diffuser{min-width:600px}.box-front{min-width:620px}.side-stack{display:flex}.summary-grid{grid-template-columns:repeat(2,1fr)}.route-grid,.issue-grid{grid-template-columns:1fr}.protocol-top{grid-template-columns:1fr}.log-item{grid-template-columns:32px 105px 1fr}.log-note{grid-column:2/-1}.lifecycle{overflow:auto}.life-step{min-width:90px}.page-head{align-items:flex-start;flex-direction:column}.footer{flex-direction:column}.status-list{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.light-diffuser{animation:none!important}.light-diffuser[data-effect="blue"]{background:#24698f}.light-diffuser[data-effect="red-breath"],.light-diffuser[data-effect="red-fast"]{background:#a63c3c}.light-diffuser[data-effect="purple"]{background:#9454ad}.toggle-handle{transition:none}}
+
+.rule-row{display:flex;align-items:center;gap:10px;padding:12px 0;color:#b9c4cf;font-size:13px;cursor:pointer}
+.rule-row input{width:16px;height:16px;accent-color:var(--accent)}
+#mappingRows td{padding:9px 10px;border-top:1px solid var(--line);font-size:13px}
+#mappingRows select{width:100%;max-width:220px;background:var(--surface2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:13px}
+.lock-tag{color:var(--warn);font-size:12px}
 </style>
 </head>
 <body>
 <div class="shell">
 <header class="topbar">
-  <div class="brand"><div class="brand-mark">DC</div><div><p class="eyebrow">Desk Control / Pro 2.1</p><h1>智能桌面控制盒</h1></div></div>
+  <div class="brand"><div class="brand-mark">DC</div><div><p class="eyebrow">Desk Control / Pro 3.1</p><h1>智能桌面控制盒</h1></div></div>
   <div class="sim-badge"><span class="sim-dot"></span>软件模拟 · 非真实设备</div>
 </header>
 <nav class="tabs" aria-label="原型页面" role="tablist">
   <button class="tab-button" id="tabButtonExperience" role="tab" aria-selected="true" aria-controls="experiencePage" data-tab="experience">盒子体验</button>
   <button class="tab-button" id="tabButtonHardware" role="tab" aria-selected="false" aria-controls="hardwarePage" data-tab="hardware">硬件接入还差什么</button>
   <button class="tab-button" id="tabButtonEvidence" role="tab" aria-selected="false" aria-controls="evidencePage" data-tab="evidence">验证与证据</button>
+  <button class="tab-button" id="tabButtonConfig" role="tab" aria-selected="false" aria-controls="configPage" data-tab="config">开关配置</button>
 </nav>
 <main>
 <section id="experiencePage" role="tabpanel" aria-labelledby="tabButtonExperience">
@@ -116,40 +123,134 @@
   <section class="card content-card"><h3>证据分层</h3><div class="table-scroll"><table><thead><tr><th>层级</th><th>本轮结论</th><th>范围</th></tr></thead><tbody>
     <tr><td>用户材料 / 设计声明</td><td><span class="tag unknown">已读取</span></td><td>两份 Markdown 提供功能矩阵、候选 BOM 和设计想法；不证明实物已存在。</td></tr>
     <tr><td>软件模拟</td><td><span class="tag sim">已完成</span></td><td>离线页面、五开关状态机、四种场景与双向协议回放。</td></tr>
-    <tr><td>本轮宿主观察</td><td><span class="tag ok" id="hostEvidenceBadge">47 项通过</span></td><td id="hostEvidenceText">Chromium 的 file:// 离线上下文：47 项检查全部通过，0 个网络请求，0 个 JavaScript 或控制台错误；不包含 Windows 真机。</td></tr>
+    <tr><td>本轮宿主观察</td><td><span class="tag ok" id="hostEvidenceBadge">46 项通过</span></td><td id="hostEvidenceText">Chromium 的 file:// 离线上下文：解耦版 46 项检查全部通过（含默认行为对照与配置专项），0 个网络请求，0 个 JavaScript 或控制台错误；不包含 Windows 真机。原始 V3.1 的 47 项检查记录见 verification.json，解耦版记录见 verification-decoupled.json。</td></tr>
     <tr><td>真实硬件验收</td><td><span class="tag unknown">未进行</span></td><td>没有开发板、开关、LED、麦克风、Type-C 数据或电源实测。</td></tr>
     <tr><td>认证与量产</td><td><span class="tag unknown">未证实</span></td><td>没有认证报告、量产测试、供货询价或真实成本凭证。</td></tr>
   </tbody></table></div></section>
   <section class="card content-card"><h3>确定性协议回放</h3><p class="section-intro">这些结果来自独立回放文件，不是浏览器里临时编造的计数。网络调用与真实硬件消息均为 0。</p><div class="table-scroll"><table><thead><tr><th>回放</th><th>输入消息</th><th>结果</th><th>最终业务状态</th></tr></thead><tbody>
     <tr><td>在线成功 + 重复 + 超时</td><td>9</td><td>7 条接受；1 条重复忽略；1 条迟到完成被拒绝；1 个模拟 applied</td><td>静音请求 applied；重启请求 timeout_result_unknown</td></tr>
     <tr><td>设备离线</td><td>4</td><td>3 条接受；送达被拒绝；0 个 applied</td><td>completed_delivery_unknown</td></tr>
-  </tbody></table></div><div class="evidence-links"><a class="evidence-link" href="evidence/replay-online.json" download>在线回放 JSON</a><a class="evidence-link" href="evidence/replay-offline.json" download>离线回放 JSON</a><a class="evidence-link" href="evidence/adapter-contract.json" download>接入合同 JSON</a><a class="evidence-link" href="evidence/integration-gaps.json" download>能力缺口 JSON</a><a class="evidence-link" href="evidence/verification.json" download>浏览器验收 JSON</a></div></section>
-  <section class="card content-card"><h3>本轮浏览器检查</h3><p class="section-intro" id="browserCheckIntro">2026-11-16 在 Chromium 的 file:// 离线上下文中完成 47 项检查，全部通过；0 个网络请求，0 个 JavaScript 或控制台错误。此结果不声称 Windows、真实 WorkBuddy 路由或硬件兼容性。</p><ul class="check-list" id="browserCheckList"><li><span class="check-mark">通过</span><span>15 个开关位置、盒子关机恢复、语音与全部光效联动</span></li><li><span class="check-mark">通过</span><span>成功、离线、超时、重复事件，以及未应用时不更新电脑状态</span></li><li><span class="check-mark">通过</span><span>日志下载、硬件与证据页、文本输入安全、零网络请求和零脚本错误</span></li></ul></section>
+  </tbody></table></div><div class="evidence-links"><a class="evidence-link" href="../evidence/replay-online.json" download>在线回放 JSON</a><a class="evidence-link" href="../evidence/replay-offline.json" download>离线回放 JSON</a><a class="evidence-link" href="../evidence/adapter-contract.json" download>接入合同 JSON</a><a class="evidence-link" href="../evidence/integration-gaps.json" download>能力缺口 JSON</a><a class="evidence-link" href="../evidence/verification.json" download>原始版验收 JSON</a><a class="evidence-link" href="../evidence/verification-decoupled.json" download>解耦版验收 JSON</a></div></section>
+  <section class="card content-card"><h3>本轮浏览器检查</h3><p class="section-intro" id="browserCheckIntro">2026-11-17 在 Chromium 的 file:// 离线上下文中完成解耦版 46 项检查，全部通过；含与原始 V3.1 的默认状态逐字段对照。0 个网络请求，0 个 JavaScript 或控制台错误。此结果不声称 Windows、真实硬件兼容性。原始版 47 项见 verification.json，解耦版逐项见 verification-decoupled.json。</p><ul class="check-list" id="browserCheckList"><li><span class="check-mark">通过</span><span>默认状态与 V3.1 逐字段一致；15 个开关位置、关机恢复、语音与全部光效联动</span></li><li><span class="check-mark">通过</span><span>成功、离线、超时、重复事件；未应用时不更新电脑状态</span></li><li><span class="check-mark">通过</span><span>9 项可配置 / 6 项锁定；映射生效、持久化、恢复默认、篡改回退、联动规则开关</span></li><li><span class="check-mark">通过</span><span>日志下载、硬件与证据页、文本输入安全、零网络请求和零脚本错误</span></li></ul></section>
   <section class="card content-card"><h3>下一份真实验收记录应包含</h3><p class="section-intro">精确板型与修订、固件版本、接线图、Windows 版本、操作步骤、预期结果、实际结果、日期和原始日志。任何一项模拟通过都不能替代这些记录。</p></section>
+</section>
+
+<section id="configPage" role="tabpanel" aria-labelledby="tabButtonConfig" hidden>
+  <div class="page-head"><div><p class="eyebrow">Configurable mapping</p><h2>开关映射配置</h2><p>每个物理位置执行哪个动作，在这里集中定义。默认映射与 V3.1 交互基线完全一致；改动只保存在本机浏览器，不联网、不上传。</p></div><span class="tag sim">本机保存 · 非真实设备</span></div>
+  <section class="card content-card"><h3>位置 → 动作映射</h3><p class="section-intro">2、3、4 号共 9 个位置可自由配置。1 号语音/麦克风与 5 号电源涉及硬件门控与重启安全，保持锁定，不随配置改变。</p>
+    <div class="table-scroll"><table><thead><tr><th>物理位置</th><th>执行动作</th><th>能力</th><th>约束</th></tr></thead><tbody id="mappingRows"></tbody></table></div>
+    <div class="button-row" style="margin-top:14px"><button class="btn primary" id="saveConfigButton" type="button">保存配置</button><button class="btn" id="restoreConfigButton" type="button">恢复默认映射</button></div>
+    <p class="help-text" id="configStatus">默认配置 = V3.1 交互基线。</p>
+  </section>
+  <section class="card content-card"><h3>跨开关联动规则</h3><p class="section-intro">原型的跨开关联动已改为显式规则。关闭后，麦克风禁用不再触发 2 号上位的红色快闪；其余安全约束（单任务锁、逻辑关机门控、重启边沿）不受此规则影响。</p>
+    <label class="rule-row"><input type="checkbox" id="micAlertRule" checked><span>麦克风禁用时，2 号上位显示红色快闪 3 秒（V3.1 默认行为）</span></label>
+  </section>
+  <section class="card content-card"><h3>解耦边界说明</h3><p class="section-intro">本页演示软件层解耦；下列内容属于硬件与安全约束，刻意不纳入可配置范围。</p>
+    <div class="issue-grid">
+      <div class="issue"><strong>1 号麦克风门控</strong><p>硬件提案方案 A 由 SW1 两根原始输入线经 74LVC1G11 直接门控麦克风供电，不经过固件。软件改映射无法改变硬件通断，故锁定。</p></div>
+      <div class="issue"><strong>5 号电源与重启</strong><p>逻辑关机要求 RP2040 全时供电以检测回中；重启采用单次边沿 + 武装状态机。二者为安全策略，不随配置改变。</p></div>
+      <div class="issue"><strong>单任务 busy 锁</strong><p>忙碌期间 3/4/5 号请求返回 busy、不排队，避免过期动作，属开发手册 3.3 的首版规则。</p></div>
+    </div>
+  </section>
 </section>
 </main>
 <footer class="footer"><span>依据：《智能盒子产品开发沟通》与《智能盒子产品手册 V2.1》</span><span>离线单文件 · 无外部字体、图片、脚本或网络请求</span></footer>
 </div>
 <script>
 'use strict';
+/* -------------------------------------------------------------------------
+ * 桌面控制盒原型 · 配置驱动 / 事件驱动版本
+ * 设计约束：
+ *  1) 默认映射 == V3.1 原始 15 位置语义，47 项离线检查行为不变
+ *  2) SW1 麦克风与 SW5 电源涉及硬件门控，映射锁定、不可用户配置
+ *  3) 灯光只订阅事件、不读取其他开关的物理位置；联动改为可配置规则
+ *  4) 单任务 busy 锁与重启边沿语义保留，属安全策略不开放配置
+ * ------------------------------------------------------------------------- */
 const PROJECT_ID='desk-box-pro-v21';
 const DEVICE_ID='virtual-desk-box';
 const BOOT_ID='browser-'+Date.now().toString(36);
-const switchDefs={
-  1:{name:'语音',capability:'voice_control',positions:{up:{position:'上位',action:'关闭语音助手'},mid:{position:'中位',action:'启用语音助手'},down:{position:'下位',action:'仅禁用麦克风'}}},
-  2:{name:'灯光',capability:'led_output',positions:{up:{position:'上位',action:'白光常亮'},mid:{position:'中位',action:'灯光关闭'},down:{position:'下位',action:'动态状态光效'}}},
-  3:{name:'声音',capability:'windows_audio',positions:{up:{position:'上位',action:'电脑静音'},mid:{position:'中位',action:'正常音量'},down:{position:'下位',action:'静音并熄屏'}}},
-  4:{name:'显示',capability:'windows_projection',positions:{up:{position:'上位',action:'扩展屏幕'},mid:{position:'中位',action:'仅主屏'},down:{position:'下位',action:'复制屏幕'}}},
-  5:{name:'电源',capability:'device_power',positions:{up:{position:'上位',action:'重启电脑'},mid:{position:'中位',action:'开启盒子'},down:{position:'下位',action:'关闭盒子'}}}
-};
 const $=id=>document.getElementById(id);
-let state={switches:{1:'mid',2:'mid',3:'mid',4:'mid',5:'mid'},voice:true,micBlocked:false,power:true,systemMode:'standby'};
+
+/* 能力注册表：actionId -> 能力/标签/作用域。scope=locked 表示硬件门控，不可重映射 */
+const CAPABILITIES={
+  voice_off:           {capability:'voice_control',      label:'关闭语音助手',            scope:'locked'},
+  voice_on:            {capability:'voice_control',      label:'启用语音助手',            scope:'locked'},
+  mic_block:           {capability:'microphone_mute',    label:'仅禁用麦克风',            scope:'locked'},
+  light_white:         {capability:'led_output',         label:'白光常亮',                scope:'local'},
+  light_off:           {capability:'led_output',         label:'灯光关闭',                scope:'local'},
+  light_dynamic:       {capability:'led_output',         label:'动态状态光效',            scope:'local'},
+  audio_mute:          {capability:'windows_audio',      label:'电脑静音',                scope:'host'},
+  audio_restore:       {capability:'windows_audio',      label:'正常音量',                scope:'host'},
+  display_off:         {capability:'windows_display',    label:'静音并熄屏',              scope:'host'},
+  display_restore:     {capability:'windows_display',    label:'恢复显示',                scope:'host'},
+  projection_extend:   {capability:'windows_projection', label:'扩展屏幕',                scope:'host'},
+  projection_internal: {capability:'windows_projection', label:'仅主屏',                  scope:'host'},
+  projection_clone:    {capability:'windows_projection', label:'复制屏幕',                scope:'host'},
+  restart:             {capability:'windows_restart',    label:'重启电脑',                scope:'locked'},
+  power_on:            {capability:'device_power',       label:'开启盒子',                scope:'locked'},
+  power_off:           {capability:'device_power',       label:'关闭盒子',                scope:'locked'},
+  noop:                {capability:'none',               label:'无动作',                  scope:'local'}
+};
+const SWITCH_NAMES={1:'语音',2:'灯光',3:'声音',4:'显示',5:'电源'};
+const POSITION_NAMES={up:'上位',mid:'中位',down:'下位'};
+const DEFAULT_MAPPING={
+  '1:up':'voice_off','1:mid':'voice_on','1:down':'mic_block',
+  '2:up':'light_white','2:mid':'light_off','2:down':'light_dynamic',
+  '3:up':'audio_mute','3:mid':'audio_restore','3:down':'display_off',
+  '4:up':'projection_extend','4:mid':'projection_internal','4:down':'projection_clone',
+  '5:up':'restart','5:mid':'power_on','5:down':'power_off'
+};
+const LOCKED_KEYS=Object.keys(DEFAULT_MAPPING).filter(k=>CAPABILITIES[DEFAULT_MAPPING[k]].scope==='locked');
+const STORAGE_KEY='deskbox.mapping.v1';
+const RULE_KEY='deskbox.rules.v1';
+const DEFAULT_RULES={micAlertOnWhite:true};
+function isLocked(key){return LOCKED_KEYS.indexOf(key)>=0;}
+function loadMapping(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return Object.assign({},DEFAULT_MAPPING);
+    const obj=JSON.parse(raw);const out=Object.assign({},DEFAULT_MAPPING);
+    for(const key of Object.keys(DEFAULT_MAPPING)){
+      if(isLocked(key))continue;
+      const v=obj&&obj[key];
+      if(typeof v==='string'&&CAPABILITIES[v]&&CAPABILITIES[v].scope!=='locked')out[key]=v;
+    }
+    return out;
+  }catch(e){return Object.assign({},DEFAULT_MAPPING);}
+}
+function saveMapping(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(mapping));}catch(e){}}
+function loadRules(){
+  try{
+    const raw=localStorage.getItem(RULE_KEY);if(!raw)return Object.assign({},DEFAULT_RULES);
+    const obj=JSON.parse(raw);return {micAlertOnWhite:typeof obj.micAlertOnWhite==='boolean'?obj.micAlertOnWhite:true};
+  }catch(e){return Object.assign({},DEFAULT_RULES);}
+}
+function saveRules(){try{localStorage.setItem(RULE_KEY,JSON.stringify(rules));}catch(e){}}
+let mapping=loadMapping();
+let rules=loadRules();
+
+/* 事件总线：把灯光从语音/任务/电源的直接读取中解耦为显式订阅 */
+const bus={handlers:{},on(type,fn){(this.handlers[type]||(this.handlers[type]=[])).push(fn);},emit(type,payload){(this.handlers[type]||[]).forEach(fn=>fn(payload||{}));}};
+
+/* 运行时状态按域拆分：physical / privacy / power / task；applied 为宿主已应用事实 */
+const domain={
+  sw:{1:'mid',2:'mid',3:'mid',4:'mid',5:'mid'},
+  privacy:{voice:true,micBlocked:false},
+  power:{on:true},
+  task:{mode:'standby'}
+};
+/* 灯光模块私有状态：只由 light_* 动作与订阅事件写入 */
+const lightState={target:'mid',micBlocked:false,taskMode:'standby',powerOn:true};
 let applied={muted:false,screen:true,projection:'仅主屏',pc:'正常'};
 let logs=[],requests={},activeRequestId=null,pending=null,lastAction={type:'switch',switchId:3,position:'mid'};
 let seq=0,runSeq=0,eventSeq=0,busy=false,timers=[],flashUntil=0,pendingApply=null;
+
 function later(fn,ms){const id=setTimeout(fn,ms);timers.push(id);return id;}
 function clearTimers(){for(const id of timers)clearTimeout(id);timers=[];}
 function text(id,value){$(id).textContent=value;}
+function actionIdOf(key){return mapping[key]||'noop';}
+function actionLabel(key){return CAPABILITIES[actionIdOf(key)].label;}
+function blockedByBusy(id){return busy&&id>=3;}
 function addLog(entry){
   logs.push({sequence:++seq,project_id:PROJECT_ID,device_id:DEVICE_ID,boot_id:BOOT_ID,result_source:'software_simulation',...entry});
   renderLogs();
@@ -157,20 +258,63 @@ function addLog(entry){
 function addLocal(kind,note,capability){
   addLog({request_id:null,event_id:'evt-local-'+(++eventSeq),revision:0,kind,capability:capability||'local',direction:'local',outcome:'applied',note});
 }
+
+/* ---- 事件订阅：灯光只消费事件载荷，不读 domain.privacy / domain.task / domain.power ---- */
+bus.on('privacy:mic',p=>{lightState.micBlocked=!!p.blocked;maybeMicAlert();renderLight();});
+bus.on('task:mode',p=>{lightState.taskMode=p.mode;renderLight();});
+bus.on('power:state',p=>{lightState.powerOn=!!p.on;renderLight();});
+function maybeMicAlert(){
+  if(rules.micAlertOnWhite&&lightState.micBlocked&&lightState.target==='up'&&Date.now()>=flashUntil){
+    flashUntil=Date.now()+3000;
+    addLocal('device.light.alert','麦克风禁用：红色快闪 3 秒，之后恢复白光','led_output');
+    later(()=>renderLight(),3050);
+  }
+}
+
+/* ---- 能力处理器：动作实现集中注册，triggerSwitch 不再按开关号硬编码分派 ---- */
+function projectionRequest(mode){
+  startRequest({capability:'windows_projection',action:'set_projection',label:'4号开关 · '+mode,result:{text:'模拟结果：'+mode,mode},onApplied:()=>{applied.projection=mode;}});
+}
+const HANDLERS={
+  voice_off:()=>{domain.privacy.voice=false;domain.privacy.micBlocked=false;flashUntil=0;bus.emit('privacy:mic',{blocked:false});addLocal('device.voice.applied','语音助手已关闭（仅页面状态）','voice_control');},
+  voice_on:()=>{domain.privacy.voice=true;domain.privacy.micBlocked=false;flashUntil=0;bus.emit('privacy:mic',{blocked:false});addLocal('device.voice.applied','语音助手与麦克风已启用（仅页面状态）','voice_control');},
+  mic_block:()=>{domain.privacy.voice=true;domain.privacy.micBlocked=true;bus.emit('privacy:mic',{blocked:true});addLocal('device.microphone.applied','麦克风禁用且助手继续运行（不是物理隔离证据）','microphone_mute');},
+  light_white:()=>{lightState.target='up';addLocal('device.light.applied','顶部光效目标：白光常亮','led_output');maybeMicAlert();},
+  light_off:()=>{lightState.target='mid';addLocal('device.light.applied','顶部光效目标：灯光关闭','led_output');},
+  light_dynamic:()=>{lightState.target='down';addLocal('device.light.applied','顶部光效目标：动态状态光效','led_output');},
+  audio_mute:()=>startRequest({capability:'windows_audio',action:'switch_3_up',label:'3号开关 · 静音',result:{text:'模拟结果：静音'},onApplied:()=>{applied.muted=true;}}),
+  audio_restore:()=>startRequest({capability:'windows_audio',action:'switch_3_mid',label:'3号开关 · 正常音量',result:{text:'模拟结果：正常音量'},onApplied:()=>{applied.muted=false;applied.screen=true;}}),
+  display_off:()=>startRequest({capability:'windows_display',action:'switch_3_down',label:'3号开关 · 静音并熄屏',result:{text:'模拟结果：静音并熄屏'},onApplied:()=>{applied.muted=true;applied.screen=false;}}),
+  display_restore:()=>startRequest({capability:'windows_display',action:'restore_session',label:'恢复显示',result:{text:'模拟结果：恢复显示'},onApplied:()=>{applied.screen=true;}}),
+  projection_extend:()=>projectionRequest('扩展屏幕'),
+  projection_internal:()=>projectionRequest('仅主屏'),
+  projection_clone:()=>projectionRequest('复制屏幕'),
+  restart:()=>startRequest({capability:'windows_restart',action:'restart_windows',label:'5号开关 · 重启电脑',result:{text:'模拟结果：重启流程已应用'},onApplied:()=>{applied.pc='模拟重启回执';}}),
+  power_on:()=>{domain.power.on=true;bus.emit('power:state',{on:true});addLocal('device.power.applied','盒子已开启（未控制任何真实电源）','device_power');},
+  power_off:()=>{domain.power.on=false;pending=null;bus.emit('power:state',{on:false});addLocal('device.power.applied','盒子已关闭（未切断任何真实电源）','device_power');},
+  noop:()=>{addLocal('local.noop','当前位置未配置动作','local');}
+};
+function dispatch(actionId){
+  const handler=HANDLERS[actionId]||HANDLERS.noop;
+  handler();
+}
+
+/* ---- 开关 UI ---- */
 function renderSwitches(){
   const bank=$('switchBank');bank.replaceChildren();
-  for(const [idText,def] of Object.entries(switchDefs)){
-    const id=Number(idText);
+  for(const id of [1,2,3,4,5]){
     const module=document.createElement('section');module.className='switch-module';module.dataset.switch=id;
     const title=document.createElement('div');title.className='switch-title';
     const number=document.createElement('span');number.className='switch-number';number.textContent=id;
-    const name=document.createElement('span');name.className='switch-name';name.textContent=def.name;title.append(number,name);
+    const name=document.createElement('span');name.className='switch-name';name.textContent=SWITCH_NAMES[id];title.append(number,name);
     const body=document.createElement('div');body.className='switch-body';
-    const track=document.createElement('div');track.className='toggle-track';track.id='track-'+id;track.dataset.current=state.switches[id];track.setAttribute('aria-hidden','true');
+    const track=document.createElement('div');track.className='toggle-track';track.id='track-'+id;track.dataset.current=domain.sw[id];track.setAttribute('aria-hidden','true');
     const handle=document.createElement('span');handle.className='toggle-handle';track.append(handle);
     const positions=document.createElement('div');positions.className='position-buttons';
     for(const pos of ['up','mid','down']){
-      const info=def.positions[pos];const button=document.createElement('button');button.type='button';button.className='switch-position';button.dataset.switch=id;button.dataset.position=pos;button.textContent=info.position.replace('位','');button.title=id+'号开关 '+info.position+'：'+info.action;button.setAttribute('aria-label',button.title);button.addEventListener('click',()=>triggerSwitch(id,pos));positions.append(button);
+      const button=document.createElement('button');button.type='button';button.className='switch-position';button.dataset.switch=id;button.dataset.position=pos;button.textContent=POSITION_NAMES[pos].replace('位','');
+      button.title=id+'号开关 '+POSITION_NAMES[pos]+'：'+actionLabel(id+':'+pos);button.setAttribute('aria-label',button.title);
+      button.addEventListener('click',()=>triggerSwitch(id,pos));positions.append(button);
     }
     body.append(track,positions);
     const current=document.createElement('p');current.className='switch-current';current.id='switchCurrent-'+id;
@@ -180,61 +324,37 @@ function renderSwitches(){
 }
 function updateSwitchUI(){
   for(const id of [1,2,3,4,5]){
-    $('track-'+id).dataset.current=state.switches[id];
-    const def=switchDefs[id];text('switchCurrent-'+id,def.positions[state.switches[id]].action);
+    $('track-'+id).dataset.current=domain.sw[id];
+    text('switchCurrent-'+id,actionLabel(id+':'+domain.sw[id]));
     document.querySelectorAll('.switch-position[data-switch="'+id+'"]').forEach(button=>{
-      const active=button.dataset.position===state.switches[id];button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));
-      button.disabled=(!state.power&&!(id===5&&button.dataset.position==='mid'))||(busy&&id>=3);
+      const active=button.dataset.position===domain.sw[id];button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));
+      button.disabled=(!domain.power.on&&!(id===5&&button.dataset.position==='mid'))||blockedByBusy(id);
     });
   }
-  $('boxFront').classList.toggle('power-off',!state.power);
-  $('shutdownCover').hidden=state.power;
-  text('boxPowerBadge',state.power?'盒子开机':'盒子关闭');
-  document.querySelectorAll('.mode-button').forEach(button=>{button.classList.toggle('active',button.dataset.mode===state.systemMode);button.disabled=busy;});
+  $('boxFront').classList.toggle('power-off',!domain.power.on);
+  $('shutdownCover').hidden=domain.power.on;
+  text('boxPowerBadge',domain.power.on?'盒子开机':'盒子关闭');
+  document.querySelectorAll('.mode-button').forEach(button=>{button.classList.toggle('active',button.dataset.mode===lightState.taskMode);button.disabled=busy;});
   $('replayButton').disabled=busy;
 }
 function triggerSwitch(id,pos){
-  if(busy&&id>=3)return;
-  if(!state.power&&id!==5)return;
-  state.switches[id]=pos;lastAction={type:'switch',switchId:id,position:pos};
-  const info=switchDefs[id].positions[pos];
-  addLocal('local.switch.change',id+'号'+info.position+'：'+info.action,switchDefs[id].capability);
-  if(id===1)applyVoice(pos);
-  if(id===2){prepareLightAlert();addLocal('device.light.applied','顶部光效目标：'+info.action,'led_output');}
-  if(id===3)runAudioDisplay(pos);
-  if(id===4)runProjection(pos);
-  if(id===5)runPower(pos);
+  if(blockedByBusy(id))return;
+  if(!domain.power.on&&id!==5)return;
+  domain.sw[id]=pos;lastAction={type:'switch',switchId:id,position:pos};
+  const key=id+':'+pos;const actionId=actionIdOf(key);
+  addLocal('local.switch.change',id+'号'+POSITION_NAMES[pos]+'：'+actionLabel(key),CAPABILITIES[actionId].capability);
+  dispatch(actionId);
   updateAll();
 }
-function applyVoice(pos){
-  if(pos==='up'){state.voice=false;state.micBlocked=false;flashUntil=0;addLocal('device.voice.applied','语音助手已关闭（仅页面状态）','voice_control');}
-  if(pos==='mid'){state.voice=true;state.micBlocked=false;flashUntil=0;addLocal('device.voice.applied','语音助手与麦克风已启用（仅页面状态）','voice_control');}
-  if(pos==='down'){state.voice=true;state.micBlocked=true;addLocal('device.microphone.applied','麦克风禁用且助手继续运行（不是物理隔离证据）','microphone_mute');prepareLightAlert();}
-}
-function prepareLightAlert(){
-  if(state.switches[2]==='up'&&state.micBlocked){flashUntil=Date.now()+3000;addLocal('device.light.alert','麦克风禁用：红色快闪 3 秒，之后恢复白光','led_output');later(()=>updateLight(),3050);}
-}
-function runAudioDisplay(pos){
-  const isDisplay=pos==='down';const target=pos==='up'?'静音':pos==='mid'?'正常音量':'静音并熄屏';
-  const capability=isDisplay?'windows_display':'windows_audio';
-  startRequest({capability,action:'switch_3_'+pos,label:'3号开关 · '+target,result:{text:'模拟结果：'+target},onApplied:()=>{applied.muted=pos!=='mid';if(pos==='down')applied.screen=false;else if(pos==='mid')applied.screen=true;}});
-}
-function runProjection(pos){
-  const mode=pos==='up'?'扩展屏幕':pos==='mid'?'仅主屏':'复制屏幕';
-  startRequest({capability:'windows_projection',action:'set_projection',label:'4号开关 · '+mode,result:{text:'模拟结果：'+mode,mode},onApplied:()=>{applied.projection=mode;}});
-}
-function runPower(pos){
-  if(pos==='down'){state.power=false;pending=null;addLocal('device.power.applied','盒子已关闭（未切断任何真实电源）','device_power');return;}
-  if(pos==='mid'){state.power=true;addLocal('device.power.applied','盒子已开启（未控制任何真实电源）','device_power');return;}
-  startRequest({capability:'windows_restart',action:'restart_windows',label:'5号开关 · 重启电脑',result:{text:'模拟结果：重启流程已应用'},onApplied:()=>{applied.pc='模拟重启回执';}});
-}
+
+/* ---- 请求生命周期：与 V3.1 相同的五阶段、幂等、超时与离线语义 ---- */
 function startRequest(config){
   if(busy)return;
   busy=true;pendingApply=config.onApplied||null;
   const requestId='req-browser-'+(++runSeq);activeRequestId=requestId;
   requests[requestId]={request_id:requestId,capability:config.capability,revision:0,submitted:false,accepted:false,completed:false,delivered:false,applied:false,status:'created',result:null};
   pending={label:config.label,status:'submitted',capability:config.capability};
-  state.systemMode='working';
+  bus.emit('task:mode',{mode:'working'});
   addProtocol(requestId,'device.task.submit','device → host',1,'accepted','submitted',config.capability,{action:config.action},config.label+' 已提交，尚未执行','evt-'+requestId+'-submit');
   updateAll();
   later(()=>{
@@ -246,7 +366,7 @@ function startRequest(config){
     later(()=>{
       const request=requests[requestId];if(!request)return;
       addProtocol(requestId,'host.task.completed','host',3,'rejected','expired',config.capability,{result:config.result},'超过截止时间，迟到结果不能推进状态');
-      request.status='timeout_result_unknown';pending.status='timeout_result_unknown';state.systemMode='error';finishRequest(requestId,'超时：执行结果未知，先核对原请求');
+      request.status='timeout_result_unknown';pending.status='timeout_result_unknown';bus.emit('task:mode',{mode:'error'});finishRequest(requestId,'超时：执行结果未知，先核对原请求');
     },720);return;
   }
   later(()=>{
@@ -258,7 +378,7 @@ function startRequest(config){
     later(()=>{
       const request=requests[requestId];if(!request)return;
       addProtocol(requestId,'host.result.deliver','host → device',4,'rejected','device_offline_delivery_unknown',config.capability,{result:config.result},'设备离线：宿主已完成，但送达与应用未知');
-      request.status='completed_delivery_unknown';pending.status='completed_delivery_unknown';state.systemMode='error';finishRequest(requestId,'离线：宿主完成，设备送达未知');
+      request.status='completed_delivery_unknown';pending.status='completed_delivery_unknown';bus.emit('task:mode',{mode:'error'});finishRequest(requestId,'离线：宿主完成，设备送达未知');
     },680);return;
   }
   later(()=>{
@@ -270,7 +390,7 @@ function startRequest(config){
     addProtocol(requestId,'device.result.applied','device → host',5,'accepted','result_applied',config.capability,{result:config.result},'模拟设备已应用同一结果');
     request.status='applied';pending.status='applied';
     if(pendingApply){const apply=pendingApply;pendingApply=null;apply();}
-    state.systemMode='standby';
+    bus.emit('task:mode',{mode:'standby'});
     if(mode==='duplicate'){
       addProtocol(requestId,'device.task.submit','device → host',1,'duplicate_ignored','same_event_id_and_payload',config.capability,{action:config.action},'同一 event_id 与载荷重复，已幂等忽略','evt-'+requestId+'-submit');
     }
@@ -297,23 +417,25 @@ function finishRequest(requestId,message){
   text('activeRequestLabel',requestId+' · '+message+'。此状态仅为软件模拟。');
   updateAll();
 }
-function updateLight(){
+
+/* ---- 灯光状态机：只读 lightState，效果优先级与 V3.1 相同 ---- */
+function renderLight(){
   let effect='off',label='灯光关闭';
-  if(state.power){
-    if(state.switches[2]==='up'){
-      if(state.micBlocked&&Date.now()<flashUntil){effect='red-fast';label='麦克风禁用 · 红色快闪 3 秒';}
-      else{effect='white';label=state.micBlocked?'白光常亮 · 麦克风仍禁用':'白光常亮';}
-    }else if(state.switches[2]==='down'){
-      if(state.systemMode==='working'){effect='purple';label='指令执行 · 紫色双闪';}
-      else if(state.systemMode==='error'){effect='red-breath';label='异常状态 · 红色呼吸';}
+  if(lightState.powerOn){
+    if(lightState.target==='up'){
+      if(lightState.micBlocked&&Date.now()<flashUntil){effect='red-fast';label='麦克风禁用 · 红色快闪 3 秒';}
+      else{effect='white';label=lightState.micBlocked?'白光常亮 · 麦克风仍禁用':'白光常亮';}
+    }else if(lightState.target==='down'){
+      if(lightState.taskMode==='working'){effect='purple';label='指令执行 · 紫色双闪';}
+      else if(lightState.taskMode==='error'){effect='red-breath';label='异常状态 · 红色呼吸';}
       else{effect='blue';label='待命 · 蓝色呼吸';}
     }
   }else{label='盒子已关闭';}
   $('lightDiffuser').dataset.effect=effect;text('lightLabel',label);
 }
 function updateStatus(){
-  text('voiceStatus',state.voice?'启用（模拟）':'已关闭（模拟）');
-  text('micStatus',state.micBlocked?'禁用（仅模拟）':state.voice?'启用（模拟）':'随助手关闭');
+  text('voiceStatus',domain.privacy.voice?'启用（模拟）':'已关闭（模拟）');
+  text('micStatus',domain.privacy.micBlocked?'禁用（仅模拟）':domain.privacy.voice?'启用（模拟）':'随助手关闭');
   text('audioStatus',applied.muted?'静音':'正常音量');
   text('pcStatus',applied.pc);
   text('monitorMode',applied.screen?applied.projection:'显示器已关闭');
@@ -347,11 +469,14 @@ function renderLogs(){
   }
   const wrap=list.parentElement;wrap.scrollTop=wrap.scrollHeight;updateLifecycle();
 }
-function updateAll(){updateSwitchUI();updateLight();updateStatus();updateLifecycle();}
+function updateAll(){updateSwitchUI();renderLight();updateStatus();updateLifecycle();updateConfigStatus();}
 function resetAll(){
-  clearTimers();state={switches:{1:'mid',2:'mid',3:'mid',4:'mid',5:'mid'},voice:true,micBlocked:false,power:true,systemMode:'standby'};
+  clearTimers();
+  domain.sw={1:'mid',2:'mid',3:'mid',4:'mid',5:'mid'};
+  domain.privacy={voice:true,micBlocked:false};domain.power={on:true};domain.task={mode:'standby'};
+  lightState.target='mid';lightState.micBlocked=false;lightState.taskMode='standby';lightState.powerOn=true;
   applied={muted:false,screen:true,projection:'仅主屏',pc:'正常'};logs=[];requests={};activeRequestId=null;pending=null;busy=false;pendingApply=null;flashUntil=0;lastAction={type:'switch',switchId:3,position:'mid'};
-  text('activeRequestLabel','尚未发起电脑任务。操作 3、4、5 号开关或提交文本任务即可开始。');renderLogs();updateAll();
+  text('activeRequestLabel','尚未发起电脑任务。操作 3、4/5 号开关或提交文本任务即可开始。');renderLogs();updateAll();
 }
 function replayCurrent(){
   if(busy)return;
@@ -363,6 +488,50 @@ function runCustom(value){
   lastAction={type:'custom',text:clean};
   startRequest({capability:'custom_text',action:'display_text',label:'文本任务 · '+clean,result:{text:clean},onApplied:()=>{}});
 }
+
+/* ---- 配置面板 ---- */
+function updateConfigStatus(){
+  const el=$('configStatus');if(!el)return;
+  const changed=Object.keys(DEFAULT_MAPPING).filter(k=>!isLocked(k)&&mapping[k]!==DEFAULT_MAPPING[k]).length;
+  el.textContent='已自定义 '+changed+' / 9 个可配置位置。配置保存在本浏览器，不联网、不上传；安全锁定项不参与保存。';
+}
+function renderMappingUI(){
+  const tbody=$('mappingRows');if(!tbody)return;
+  tbody.replaceChildren();
+  for(const id of [1,2,3,4,5]){
+    for(const pos of ['up','mid','down']){
+      const key=id+':'+pos;const actionId=actionIdOf(key);const cap=CAPABILITIES[actionId];
+      const tr=document.createElement('tr');
+      const c1=document.createElement('td');c1.textContent=id+' 号 · '+POSITION_NAMES[pos];
+      const c2=document.createElement('td');
+      if(isLocked(key)){
+        const span=document.createElement('span');span.textContent=cap.label;c2.append(span);
+      }else{
+        const sel=document.createElement('select');sel.dataset.key=key;sel.setAttribute('aria-label',id+'号'+POSITION_NAMES[pos]+'动作');
+        for(const aid of Object.keys(CAPABILITIES)){
+          const c=CAPABILITIES[aid];if(c.scope==='locked')continue;
+          const opt=document.createElement('option');opt.value=aid;opt.textContent=c.label;if(aid===actionId)opt.selected=true;sel.append(opt);
+        }
+        sel.addEventListener('change',()=>{
+          mapping[key]=sel.value;saveMapping();
+          addLocal('local.mapping.change',key+' → '+CAPABILITIES[sel.value].label,'local');
+          renderSwitches();updateAll();
+        });
+        c2.append(sel);
+      }
+      const c3=document.createElement('td');c3.textContent=cap.capability;
+      const c4=document.createElement('td');
+      if(isLocked(key)){c4.className='lock-tag';c4.textContent='锁定 · 硬件门控';}
+      else{c4.textContent='可配置';}
+      tr.append(c1,c2,c3,c4);tbody.append(tr);
+    }
+  }
+  const rule=$('micAlertRule');
+  if(rule){rule.checked=rules.micAlertOnWhite;rule.onchange=()=>{rules.micAlertOnWhite=rule.checked;saveRules();addLocal('local.rule.change','红闪提示规则：'+(rule.checked?'开启':'关闭'),'led_output');};}
+  updateConfigStatus();
+}
+
+/* ---- 事件绑定 ---- */
 for(const button of document.querySelectorAll('.tab-button')){
   button.addEventListener('click',()=>{
     for(const other of document.querySelectorAll('.tab-button'))other.setAttribute('aria-selected',String(other===button));
@@ -370,16 +539,20 @@ for(const button of document.querySelectorAll('.tab-button')){
   });
 }
 $('scenario').addEventListener('change',()=>addLocal('local.scenario.select','下次电脑任务场景：'+$('scenario').selectedOptions[0].textContent,'protocol'));
-$('modeGroup').addEventListener('click',event=>{const button=event.target.closest('[data-mode]');if(!button||busy)return;state.systemMode=button.dataset.mode;addLocal('device.light.mode','动态光效状态：'+button.textContent,'led_output');updateAll();});
+$('modeGroup').addEventListener('click',event=>{const button=event.target.closest('[data-mode]');if(!button||busy)return;bus.emit('task:mode',{mode:button.dataset.mode});addLocal('device.light.mode','动态光效状态：'+button.textContent,'led_output');updateAll();});
 $('customForm').addEventListener('submit',event=>{event.preventDefault();const value=$('customInput').value;if(!value.trim())return;runCustom(value);$('customInput').value='';});
 $('replayButton').addEventListener('click',replayCurrent);
 $('resetButton').addEventListener('click',resetAll);
 $('clearLogButton').addEventListener('click',()=>{logs=[];renderLogs();});
 $('downloadButton').addEventListener('click',()=>{
-  const data={schema_version:1,adapter:'software_simulation_only',project_id:PROJECT_ID,device_id:DEVICE_ID,boot_id:BOOT_ID,evidence_scope:'Browser interaction simulation only; not Windows or hardware acceptance.',requests:Object.values(requests),events:logs,summary:{real_hardware_messages_sent:0,network_calls:0}};
+  const data={schema_version:1,adapter:'software_simulation_only',project_id:PROJECT_ID,device_id:DEVICE_ID,boot_id:BOOT_ID,evidence_scope:'Browser interaction simulation only; not Windows or hardware acceptance.',mapping,rules,requests:Object.values(requests),events:logs,summary:{real_hardware_messages_sent:0,network_calls:0}};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='desk-box-simulation-log.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),0);
 });
-renderSwitches();renderLogs();updateAll();
+$('saveConfigButton').addEventListener('click',()=>{saveMapping();saveRules();addLocal('local.mapping.saved','映射配置已保存到本浏览器','local');updateConfigStatus();});
+$('restoreConfigButton').addEventListener('click',()=>{mapping=Object.assign({},DEFAULT_MAPPING);rules=Object.assign({},DEFAULT_RULES);saveMapping();saveRules();renderMappingUI();renderSwitches();addLocal('local.mapping.restored','映射已恢复为 V3.1 默认值','local');updateAll();});
+
+renderSwitches();renderMappingUI();renderLogs();updateAll();
+
 </script>
 </body>
 </html>

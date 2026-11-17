@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "observed_at": "2026-11-17T09:10:36.422239+00:00",
+  "browser": "Chromium via Playwright (system Chrome executable)",
+  "url_scheme": "file",
+  "browser_offline": true,
+  "scope": "Local browser observation of the decoupled prototype; not Windows or real hardware acceptance.",
+  "prototype_version": "V3.1 software-decoupled",
+  "total_checks": 46,
+  "passed": 46,
+  "failed": 0,
+  "baseline_compatibility": {
+    "default_snapshot_matches_v31": true,
+    "original_behavior_checks": 40
+  },
+  "config_checks": [
+    {
+      "name": "config_tab_present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "config_nine_editable_slots",
+      "passed": true,
+      "detail": "editable selects=9"
+    },
+    {
+      "name": "config_six_locked_slots",
+      "passed": true,
+      "detail": "locked=6"
+    },
+    {
+      "name": "config_status_updates",
+      "passed": true,
+      "detail": "已自定义 1 / 9 个可配置位置。配置保存在本浏览器，不联网、不上传；安全锁定项不参与保存。"
+    },
+    {
+      "name": "config_remap_changes_behavior",
+      "passed": true,
+      "detail": "monitor class=monitor-screen off label=静音并熄屏"
+    },
+    {
+      "name": "config_remap_updates_label",
+      "passed": true,
+      "detail": "静音并熄屏"
+    },
+    {
+      "name": "config_persists_after_reload",
+      "passed": true,
+      "detail": "3:up=display_off"
+    },
+    {
+      "name": "config_locked_items_cannot_be_overridden",
+      "passed": true,
+      "detail": "1:down 后麦克风=禁用（仅模拟）（noop 篡改若生效则应为启用）"
+    },
+    {
+      "name": "config_locked_still_six",
+      "passed": true,
+      "detail": "locked=6"
+    },
+    {
+      "name": "config_restore_defaults",
+      "passed": true,
+      "detail": "3:up=audio_mute"
+    },
+    {
+      "name": "rule_disable_mic_alert",
+      "passed": true,
+      "detail": "white"
+    }
+  ],
+  "network_requests": [],
+  "real_hardware_tested": false,
+  "windows_tested": false,
+  "checks": [
+    {
+      "name": "default_snapshot_matches_v31",
+      "passed": true,
+      "detail": "{\"old\":{\"positions\":15,\"tracks\":[\"mid\",\"mid\",\"mid\",\"mid\",\"mid\"],\"currents\":[\"启用语音助手\",\"灯光关闭\",\"正常音量\",\"仅主屏\",\"开启盒子\"],\"light\":\"off\",\"lightLabel\":\"灯光关闭\",\"voice\":\"启用（模拟）\",\"mic\":\"启用（模拟）\",\"audio\":\"正常音量\",\"monitor\":\"仅主屏\",\"badge\":\"盒子开机\"},\"new\":{\"positions\":15,\"tracks\":[\"mid\",\"mid\",\"mid\",\"mid\",\"mid\"],\"currents\":[\"启用语音助手\",\"灯光关闭\",\"正常音量\",\"仅主屏\",\"开启盒子\"],\"light\":\"off\",\"lightLabel\":\"灯光关闭\",\"voice\":\"启用（模拟）\",\"mic\":\"启用（模拟）\",\"audio\":\"正常音量\",\"monitor\":\"仅主屏\",\"badge\":\"盒子开机\"}}"
+    },
+    {
+      "name": "offline_file_load",
+      "passed": true,
+      "detail": "智能桌面控制盒 Pro · 离线交互原型"
+    },
+    {
+      "name": "fifteen_positions_rendered",
+      "passed": true,
+      "detail": "15"
+    },
+    {
+      "name": "five_middle_defaults",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "switch_positions_all_active",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "switch_labels_match_v31_defaults",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "shutdown_disables_other_switches",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "shutdown_allows_power_restore",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "power_restored",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "success_lifecycle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "success_applied_updates_audio",
+      "passed": true,
+      "detail": "静音"
+    },
+    {
+      "name": "success_applied_count",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "offline_does_not_apply_audio",
+      "passed": true,
+      "detail": "正常音量"
+    },
+    {
+      "name": "offline_delivery_unknown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "offline_no_applied",
+      "passed": true,
+      "detail": "0"
+    },
+    {
+      "name": "timeout_result_unknown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "timeout_does_not_apply_restart",
+      "passed": true,
+      "detail": "正常"
+    },
+    {
+      "name": "timeout_late_completion_rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_ignored_once",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "duplicate_still_single_applied",
+      "passed": true,
+      "detail": "1"
+    },
+    {
+      "name": "duplicate_preserves_event_identity",
+      "passed": true,
+      "detail": "扩展屏幕"
+    },
+    {
+      "name": "mic_alert_red_flash",
+      "passed": true,
+      "detail": "red-fast"
+    },
+    {
+      "name": "mic_remains_disabled",
+      "passed": true,
+      "detail": "禁用（仅模拟）"
+    },
+    {
+      "name": "mic_alert_returns_white",
+      "passed": true,
+      "detail": "white"
+    },
+    {
+      "name": "standby_blue_breath",
+      "passed": true,
+      "detail": "blue"
+    },
+    {
+      "name": "working_purple_double",
+      "passed": true,
+      "detail": "purple"
+    },
+    {
+      "name": "error_red_breath",
+      "passed": true,
+      "detail": "red-breath"
+    },
+    {
+      "name": "text_payload_not_rendered_as_html",
+      "passed": true,
+      "detail": "img count=0"
+    },
+    {
+      "name": "text_payload_not_executed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "log_download",
+      "passed": true,
+      "detail": "events=10"
+    },
+    {
+      "name": "hardware_tab",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "evidence_tab",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "config_tab_present",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "config_nine_editable_slots",
+      "passed": true,
+      "detail": "editable selects=9"
+    },
+    {
+      "name": "config_six_locked_slots",
+      "passed": true,
+      "detail": "locked=6"
+    },
+    {
+      "name": "config_status_updates",
+      "passed": true,
+      "detail": "已自定义 1 / 9 个可配置位置。配置保存在本浏览器，不联网、不上传；安全锁定项不参与保存。"
+    },
+    {
+      "name": "config_remap_changes_behavior",
+      "passed": true,
+      "detail": "monitor class=monitor-screen off label=静音并熄屏"
+    },
+    {
+      "name": "config_remap_updates_label",
+      "passed": true,
+      "detail": "静音并熄屏"
+    },
+    {
+      "name": "config_persists_after_reload",
+      "passed": true,
+      "detail": "3:up=display_off"
+    },
+    {
+      "name": "config_locked_items_cannot_be_overridden",
+      "passed": true,
+      "detail": "1:down 后麦克风=禁用（仅模拟）（noop 篡改若生效则应为启用）"
+    },
+    {
+      "name": "config_locked_still_six",
+      "passed": true,
+      "detail": "locked=6"
+    },
+    {
+      "name": "config_restore_defaults",
+      "passed": true,
+      "detail": "3:up=audio_mute"
+    },
+    {
+      "name": "rule_disable_mic_alert",
+      "passed": true,
+      "detail": "white"
+    },
+    {
+      "name": "no_network_requests",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no_javascript_errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no_console_errors",
+      "passed": true,
+      "detail": "[]"
+    }
+  ]
+}
