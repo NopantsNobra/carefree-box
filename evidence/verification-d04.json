@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "observed_at": "2026-11-18T06:44:10.398733+00:00",
+  "browser": "Chromium via Playwright",
+  "url_scheme": "file",
+  "browser_offline": true,
+  "scope": "Local browser observation of the D-04 light-semantics sync; not Windows or real hardware acceptance.",
+  "prototype_version": "V3.1 software-decoupled + D-04 semantics (2026-11-18)",
+  "decision": "D-04: red solid = microphone blocked; red blink 1 s = anomaly",
+  "supersedes": "error_red_breath expectation in verification-decoupled.json (historical record of the 2026-11-17 state, kept unchanged)",
+  "total_checks": 27,
+  "passed": 27,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "offline_file_load",
+      "passed": true,
+      "detail": "智能桌面控制盒 Pro · 离线交互原型"
+    },
+    {
+      "name": "fifteen_positions",
+      "passed": true,
+      "detail": "15"
+    },
+    {
+      "name": "five_mid_defaults",
+      "passed": true,
+      "detail": "active mid = 5"
+    },
+    {
+      "name": "light_off_default",
+      "passed": true,
+      "detail": "off"
+    },
+    {
+      "name": "standby_blue_breath",
+      "passed": true,
+      "detail": "blue"
+    },
+    {
+      "name": "working_purple_double",
+      "passed": true,
+      "detail": "purple"
+    },
+    {
+      "name": "error_red_blink",
+      "passed": true,
+      "detail": "red-blink"
+    },
+    {
+      "name": "error_label_1s_period",
+      "passed": true,
+      "detail": "异常状态 · 红色闪烁（1 秒周期）"
+    },
+    {
+      "name": "css_red_blink_duration_1s",
+      "passed": true,
+      "detail": "1s"
+    },
+    {
+      "name": "css_red_blink_step_timing",
+      "passed": true,
+      "detail": "steps(1)"
+    },
+    {
+      "name": "mic_block_down_red_solid",
+      "passed": true,
+      "detail": "red-solid"
+    },
+    {
+      "name": "mic_block_down_label",
+      "passed": true,
+      "detail": "麦克风禁用 · 红色常亮"
+    },
+    {
+      "name": "priority_working_over_mic",
+      "passed": true,
+      "detail": "purple"
+    },
+    {
+      "name": "priority_error_over_mic",
+      "passed": true,
+      "detail": "red-blink"
+    },
+    {
+      "name": "mic_block_persist_red_solid",
+      "passed": true,
+      "detail": "red-solid"
+    },
+    {
+      "name": "up_white",
+      "passed": true,
+      "detail": "white"
+    },
+    {
+      "name": "mic_alert_up_red_fast",
+      "passed": true,
+      "detail": "red-fast"
+    },
+    {
+      "name": "mic_alert_up_returns_white",
+      "passed": true,
+      "detail": "白光常亮 · 麦克风仍禁用"
+    },
+    {
+      "name": "mic_blocked_dynamic_still_solid",
+      "passed": true,
+      "detail": "red-solid"
+    },
+    {
+      "name": "mic_unblock_back_to_blue",
+      "passed": true,
+      "detail": "blue"
+    },
+    {
+      "name": "final_off",
+      "passed": true,
+      "detail": "off"
+    },
+    {
+      "name": "reduced_motion_mic_static_red",
+      "passed": true,
+      "detail": "{'name': 'none', 'bg': 'rgb(196, 67, 67)'}"
+    },
+    {
+      "name": "reduced_motion_blink_static_red",
+      "passed": true,
+      "detail": "{'name': 'none', 'bg': 'rgb(166, 60, 60)'}"
+    },
+    {
+      "name": "no_red_breath_effect_left",
+      "passed": true,
+      "detail": "page source"
+    },
+    {
+      "name": "no_javascript_errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no_console_errors",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no_network_requests",
+      "passed": true,
+      "detail": "[]"
+    }
+  ]
+}
