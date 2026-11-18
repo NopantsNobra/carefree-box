@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
-  "status": "passed",
+  "status": "superseded",
+  "superseded_by": "evidence/verification-d04.json",
+  "superseded_reason": "D-04 light semantics changed on 2026-11-18: red solid = microphone blocked, red blink (1 s) = anomaly. The error_red_breath expectation in this record no longer applies to the current prototype. Counts and checks below are the historical record of the 2026-11-17 state and are kept unchanged.",
   "observed_at": "2026-11-17T09:10:36.422239+00:00",
   "browser": "Chromium via Playwright (system Chrome executable)",
   "url_scheme": "file",
